@@ -19,10 +19,22 @@ class CodeBreaker
 
   def generate_guess
     # TODO: Add a conditional so that this random guess is only called if the codebreaker is an NPC
-    @guess = random_guess
+    if @npc == true
+      @guess = random_guess
+    else
+      puts "The choices are #{@@choices}"
+      puts "You will be asked to pick a choice from 1-6 four times to generate your code."
+      arr = []
+      4.times do
+        choice = gets.chomp.to_i until choice.is_a? Integer
+        arr.push(@@choices[choice])
+      end
+      arr
+    end
   end
 
-  def initialize
+  def initialize(npc)
+    @npc = npc
     @guess = generate_guess
   end
   
@@ -33,7 +45,8 @@ class CodeMaker
   include Player
   attr_accessor :secret_code
 
-  def initialize
+  def initialize(npc)
+    @npc = npc
     # TODO: ALlow the user to be a code maker, this is currently written with it being the NPC in mind
     @secret_code = []
     4.times { secret_code.push(@@choices.sample) }
@@ -81,10 +94,10 @@ end
 # The game will do most of the leg work of passing the object's responses to each other
 class Game
   # TODO: Complete functionality
-  def initialize
+  def initialize(breaker_npc)
     # For now, build it so that the computer generates the code and the player has to guess
-    @breaker = CodeBreaker.new
-    @maker = CodeMaker.new
+    @breaker = CodeBreaker.new(breaker_npc)
+    @maker = CodeMaker.new(!breaker_npc)
     @max_turns = 12
     @turns = 1
   end
@@ -113,3 +126,5 @@ class Game
     # TODO: Print who won and then ask to play again
   end
 end
+game = Game.new(false)
+game.play
