@@ -62,6 +62,7 @@ class CodeMaker
     # TODO: ALlow the user to be a code maker, this is currently written with it being the NPC in mind
     @secret_code = []
     4.times { secret_code.push(@@choices.sample) }
+    p @secret_code
   end
 
   def check(guess_arr)
@@ -71,9 +72,11 @@ class CodeMaker
     # The key is that a 2 indicates it is in the right place, a 1 indicates the colour is right but in the wrong place
     # A 0 means it was completely wrong
     result = []
+    p guess_arr
+    
     guess_arr.each_with_index do |guess, idx|
       if @secret_code.include? guess
-        if @secret_code.index guess == idx
+        if @secret_code[idx] == guess
           result.push 2
         else
           result.push 1
@@ -82,6 +85,7 @@ class CodeMaker
         result.push 0
       end
     end
+    p result
     result
   end
 
