@@ -23,7 +23,13 @@ class CodeBreaker
       @guess = random_guess
     else
       puts "The choices are #{@@choices}"
-      puts "You will be asked to pick a choice from 1-6 four times to generate your code."
+      puts "You will be asked to pick a choice from 1-6 four times to generate your code." # TODO: Potentially only allow the user
+      # to type the word of the colour, not the number corresponding to the colour
+      # this can be implemented by changing the choice to asking for a string
+      # if the string is invalid, it = black
+      # choice.chomp.downcase
+      #@@choices.include? choice
+      # if so then push the choice to the array
       arr = []
       4.times do
         choice = gets.chomp.to_i until choice.is_a? Integer
