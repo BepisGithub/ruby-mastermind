@@ -36,7 +36,7 @@ class CodeBreaker
         arr.push(@@choices[choice])
       end
       puts "Your choices are #{arr}"
-      arr
+      @guess = arr
     end
   end
 
@@ -101,7 +101,6 @@ end
 
 # The game will do most of the leg work of passing the object's responses to each other
 class Game
-  # TODO: Complete functionality
   def initialize(breaker_npc)
     # For now, build it so that the computer generates the code and the player has to guess
     @breaker = CodeBreaker.new(breaker_npc)
