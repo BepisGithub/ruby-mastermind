@@ -27,6 +27,7 @@ class CodeBreaker
       arr = []
       4.times do
         choice = gets.chomp.to_i until choice.is_a? Integer
+        choice -= 1
         arr.push(@@choices[choice])
       end
       puts "Your choices are #{arr}"
