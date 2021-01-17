@@ -29,6 +29,7 @@ class CodeBreaker
         choice = gets.chomp.to_i until choice.is_a? Integer
         arr.push(@@choices[choice])
       end
+      puts "Your choices are #{arr}"
       arr
     end
   end
