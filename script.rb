@@ -4,12 +4,18 @@
 # The code breaker must create a sequence and the game must pass it to see if it matches up
 # If it does then the breaker wins but if not then the maker returns some information about the positions of the colours
 
+class Player
+  choices = ["white", "black", "red", "blue", "orange", "green"] # Need 6
+end
+
 class CodeBreaker
 
 end
 
 class CodeMaker
-
+  def initialize
+    # TODO: ALlow the user to be a code maker, this is currently written with it being the NPC in mind
+  end
 end
 
 
