@@ -62,7 +62,11 @@ class CodeMaker
     return result
   end
 
-  def check_interpreter arr
+  def check_interpreter(arr)
+    if arr == "win"
+      puts "The codebreaker won!"
+      return nil
+    end
     arr.each do |result|
       # TODO: Add a switch statement to match the individual value against and print the result
     end
