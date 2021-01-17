@@ -11,6 +11,14 @@ end
 
 class CodeBreaker
   include Player
+  attr_accessor :guess
+  def random_guess
+    [@@choices.sample, @@choices.sample, @@choices.sample, @@choices.sample]
+  end
+
+  def initialize
+    @guess = random_guess
+  end
 end
 
 # This will contain everything the one who is making the code needs to 1.) Store the code 2.) Respond to a check
