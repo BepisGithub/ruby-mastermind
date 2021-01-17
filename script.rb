@@ -39,20 +39,26 @@ class CodeMaker
     4.times { secret_code.push(@@choices.sample) }
   end
 
-  def check(guess)
-    return "win" if guess == @secret_code
+  def check(guess_arr)
+    return "win" if guess_arr == @secret_code
+
     # TODO: Complete the functionality by adding checks and return values based upon certain conditions
     # Format of the response: an array which ,in no particular order, contains the key
     # The key is that a 2 indicates it is in the right place, a 1 indicates the colour is right but in the wrong place
     # A 0 means it was completely wrong
     # TODO: Create a result interpreter function to print out the results
     result = []
-    # For each guess with idx
-    # if the guess is present in the secret code
-    #   check if it is also on the same index
-    #     if so then push 2
-    #     else push 1
-    #   else push 0
+    guess_arr.each_with_index do |guess, idx|
+      if @secret_code.include? guess
+        if @secret_code.index guess == idx
+          results.push 2
+        else
+          results.push 1
+        end
+      else
+        result.push 0
+      end
+    end
   end
 end
 
