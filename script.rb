@@ -8,11 +8,11 @@ class Player
   choices = ["white", "black", "red", "blue", "orange", "green"] # Need 6
 end
 
-class CodeBreaker
+class CodeBreaker < Player
 
 end
 
-class CodeMaker
+class CodeMaker < Player
   def initialize
     # TODO: ALlow the user to be a code maker, this is currently written with it being the NPC in mind
   end
