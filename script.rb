@@ -35,7 +35,6 @@ class CodeBreaker
 
   def initialize(npc)
     @npc = npc
-    @guess = generate_guess
   end
   
 end
@@ -74,6 +73,7 @@ class CodeMaker
   end
 
   def check_interpreter(arr)
+    puts "----------------------------------"
     if arr == "win"
       puts "The codebreaker won!"
       return nil
@@ -88,6 +88,7 @@ class CodeMaker
         puts "A choice is right in the right place"
       end
     end
+    puts "----------------------------------"
   end
 end
 
