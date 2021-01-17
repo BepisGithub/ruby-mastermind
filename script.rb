@@ -46,7 +46,7 @@ class Game
     # For now, build it so that the computer generates the code and the player has to guess
     @breaker = CodeBreaker.new
     @maker = CodeMaker.new
-    @MAX_TURNS = 12
+    @max_turns = 12
     @turns = 1
   end
 
@@ -55,6 +55,9 @@ class Game
   end
 
   def play
-    round
+    until @turns>@MAX_TURNS
+      round
+      @turns += 1
+    end
   end
 end
