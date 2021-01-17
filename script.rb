@@ -14,5 +14,10 @@ end
 
 
 class Game
+  def initialize
+    # For now, build it so that the computer generates the code and the player has to guess
+    breaker = CodeBreaker.new
+    maker = CodeMaker.new
+  end
 
 end
