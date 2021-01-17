@@ -42,6 +42,17 @@ class CodeMaker
   def check(guess)
     return "win" if guess == @secret_code
     # TODO: Complete the functionality by adding checks and return values based upon certain conditions
+    # Format of the response: an array which ,in no particular order, contains the key
+    # The key is that a 2 indicates it is in the right place, a 1 indicates the colour is right but in the wrong place
+    # A 0 means it was completely wrong
+    # TODO: Create a result interpreter function to print out the results
+    result = []
+    # For each guess with idx
+    # if the guess is present in the secret code
+    #   check if it is also on the same index
+    #     if so then push 2
+    #     else push 1
+    #   else push 0
   end
 end
 
@@ -61,10 +72,12 @@ class Game
     # The return value of this check is stored in the result variable
     result = @maker.check @breaker.generate_guess
     # interpret and print results
+    # Return the results
   end
 
   def play
-    until @turns > @MAX_TURNS || @breaker.guess == @maker.secret_code
+    until @turns > @MAX_TURNS || @breaker.guess == @maker.secret_code # TODO: Replace "|| @breaker.guess == @maker.secret_code"
+      # with a check at the end of the function that breaks if the result from the round function is a win
       round
       @turns += 1
     end
