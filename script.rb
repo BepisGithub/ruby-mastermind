@@ -68,6 +68,14 @@ class CodeMaker
       return nil
     end
     arr.each do |result|
+      case result
+      when 0
+        puts "A choice is completely wrong"
+      when 1
+        puts "A choice is right, but in the wrong place"
+      when 2
+        puts "A choice is right in the right place"
+      end
       # TODO: Add a switch statement to match the individual value against and print the result
     end
   end
