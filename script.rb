@@ -93,7 +93,7 @@ class Game
     # The breaker's guess is retreived, then checked against the makers secret code
     # The return value of this check is stored in the result variable
     result = @maker.check @breaker.generate_guess
-    check_interpreter result
+    @maker.check_interpreter result
     result
     # interpret and print results
     # Return the results
