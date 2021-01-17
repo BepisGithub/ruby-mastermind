@@ -21,7 +21,11 @@ class CodeMaker
   def initialize
     # TODO: ALlow the user to be a code maker, this is currently written with it being the NPC in mind
     @secret_code = []
-    4.times do secret_code.push(@@choices.sample) end
+    4.times { secret_code.push(@@choices.sample) }
+  end
+
+  def check(guess)
+    return "win" if guess == @secret_code
   end
 end
 
