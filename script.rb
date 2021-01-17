@@ -12,6 +12,7 @@ end
 class CodeBreaker
   include Player
   attr_accessor :guess
+
   def random_guess
     [@@choices.sample, @@choices.sample, @@choices.sample, @@choices.sample]
   end
@@ -40,9 +41,11 @@ end
 
 # The game will do most of the leg work of passing the object's responses to each other
 class Game
+  # TODO: Complete functionality
   def initialize
     # For now, build it so that the computer generates the code and the player has to guess
-    breaker = CodeBreaker.new
-    maker = CodeMaker.new
+    @breaker = CodeBreaker.new
+    @maker = CodeMaker.new
+    @MAX_TURNS = 12
   end
 end
