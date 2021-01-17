@@ -28,7 +28,7 @@ class CodeBreaker
       # this can be implemented by changing the choice to asking for a string
       # if the string is invalid, it = black
       # choice.chomp.downcase
-      #@@choices.include? choice
+      # @@choices.include? choice
       # if so then push the choice to the array
       arr = []
       4.times do
