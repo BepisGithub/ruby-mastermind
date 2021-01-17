@@ -141,7 +141,7 @@ class Game
     puts "That was fun, would you like another go? (yes/no)"
     choice = gets.chomp.downcase
     if choice == "yes"
-      game = Game.new(@breaker_npc)
+      game = Game.new(@breaker_npc) # TODO: Get the input for the choice. e.g. make a get choice method, then initialize the game and from the init call the get choice method
       game.play
     end
   end
