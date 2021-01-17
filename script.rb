@@ -82,7 +82,7 @@ class CodeMaker
   def check_interpreter(arr)
     puts "----------------------------------"
     if arr == "win"
-      puts "The codebreaker won!"
+      puts "All the choices were correct!"
       return nil
     end
     arr.each do |result|
