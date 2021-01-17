@@ -85,7 +85,8 @@ class CodeMaker
     result
   end
 
-  def check_interpreter(arr)
+  def check_interpreter(results)
+    arr = results.shuffle
     puts "----------------------------------"
     if arr == "win"
       puts "All the choices were correct!"
