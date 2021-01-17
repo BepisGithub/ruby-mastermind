@@ -47,5 +47,14 @@ class Game
     @breaker = CodeBreaker.new
     @maker = CodeMaker.new
     @MAX_TURNS = 12
+    @turns = 1
+  end
+
+  def round
+
+  end
+
+  def play
+    round
   end
 end
