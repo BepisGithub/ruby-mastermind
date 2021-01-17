@@ -1,11 +1,12 @@
-class Player
-  possible_colours = ["red","green","blue","purple","orange","brown"]
-end
-
-class Human < Player
+class CodeBreaker
 
 end
 
-class CPU < Player
+class CodeMaker
+
+end
+
+
+class Game
 
 end
