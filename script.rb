@@ -26,6 +26,7 @@ class CodeMaker
 
   def check(guess)
     return "win" if guess == @secret_code
+    # TODO: Complete the functionality by adding checks and return values based upon certain conditions
   end
 end
 
