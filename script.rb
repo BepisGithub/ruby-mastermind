@@ -18,7 +18,8 @@ class CodeMaker
   attr_accessor :secret_code
   def initialize
     # TODO: ALlow the user to be a code maker, this is currently written with it being the NPC in mind
-    @secret_code = Array.new(4, @@choices.sample)
+    @secret_code = []
+    4.times do secret_code.push(@@choices.sample) end
   end
 end
 
