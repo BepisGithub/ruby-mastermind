@@ -49,9 +49,9 @@ class CodeMaker
     guess_arr.each_with_index do |guess, idx|
       if @secret_code.include? guess
         if @secret_code.index guess == idx
-          results.push 2
+          result.push 2
         else
-          results.push 1
+          result.push 1
         end
       else
         result.push 0
