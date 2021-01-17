@@ -17,9 +17,15 @@ class CodeBreaker
     [@@choices.sample, @@choices.sample, @@choices.sample, @@choices.sample]
   end
 
-  def initialize
+  def generate_guess
+    # TODO: Add a conditional so that this random guess is only called if the codebreaker is an NPC
     @guess = random_guess
   end
+
+  def initialize
+    @guess = generate_guess
+  end
+  
 end
 
 # This will contain everything the one who is making the code needs to 1.) Store the code 2.) Respond to a check
@@ -51,13 +57,17 @@ class Game
   end
 
   def round
-
+    # The breaker's guess is retreived, then checked against the makers secret code
+    # The return value of this check is stored in the result variable
+    result = @maker.check @breaker.generate_guess
+    # interpret and print results
   end
 
   def play
-    until @turns>@MAX_TURNS
+    until @turns > @MAX_TURNS || @breaker.guess == @maker.secret_code
       round
       @turns += 1
     end
+    # TODO: Print who won and then ask to play again
   end
 end
