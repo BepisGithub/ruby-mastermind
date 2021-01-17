@@ -4,18 +4,20 @@
 # The code breaker must create a sequence and the game must pass it to see if it matches up
 # If it does then the breaker wins but if not then the maker returns some information about the positions of the colours
 
+# This module contains things the players will need
 module Player
   @@choices = ["white", "black", "red", "blue", "orange", "green"] # Need 6
 end
 
 class CodeBreaker
   include Player
-
 end
 
+# This will contain everything the one who is making the code needs to 1.) Store the code 2.) Respond to a check
 class CodeMaker
   include Player
   attr_accessor :secret_code
+
   def initialize
     # TODO: ALlow the user to be a code maker, this is currently written with it being the NPC in mind
     @secret_code = []
@@ -23,12 +25,11 @@ class CodeMaker
   end
 end
 
-
+# The game will do most of the leg work of passing the object's responses to each other
 class Game
   def initialize
     # For now, build it so that the computer generates the code and the player has to guess
     breaker = CodeBreaker.new
     maker = CodeMaker.new
   end
-
 end
