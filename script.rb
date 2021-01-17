@@ -5,7 +5,7 @@
 # If it does then the breaker wins but if not then the maker returns some information about the positions of the colours
 
 module Player
-  choices = ["white", "black", "red", "blue", "orange", "green"] # Need 6
+  @@choices = ["white", "black", "red", "blue", "orange", "green"] # Need 6
 end
 
 class CodeBreaker
@@ -15,8 +15,10 @@ end
 
 class CodeMaker
   include Player
+  attr_accessor :secret_code
   def initialize
     # TODO: ALlow the user to be a code maker, this is currently written with it being the NPC in mind
+    @secret_code = Array.new(4, @@choices.sample)
   end
 end
 
