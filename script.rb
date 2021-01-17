@@ -71,9 +71,12 @@ class CodeMaker
     # Format of the response: an array which ,in no particular order, contains the key
     # The key is that a 2 indicates it is in the right place, a 1 indicates the colour is right but in the wrong place
     # A 0 means it was completely wrong
+
+    # Duplicates are not all awarded
+    # E.g. if you guess 3 reds but there are two, nothing should be awarded for the third
+
+    # REFACTOR
     result = []
-    p guess_arr
-    
     guess_arr.each_with_index do |guess, idx|
       if @secret_code.include? guess
         if @secret_code[idx] == guess
@@ -85,10 +88,10 @@ class CodeMaker
         result.push 0
       end
     end
-    p result
     result
   end
 
+  # REFACTOR
   def check_interpreter(results)
     arr = results.shuffle
     puts "----------------------------------"
