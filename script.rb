@@ -59,6 +59,13 @@ class CodeMaker
         result.push 0
       end
     end
+    return result
+  end
+
+  def check_interpreter arr
+    arr.each do |result|
+      # TODO: Add a switch statement to match the individual value against and print the result
+    end
   end
 end
 
