@@ -109,6 +109,7 @@ end
 class Game
   def initialize(breaker_npc)
     # For now, build it so that the computer generates the code and the player has to guess
+    @breaker_npc = breaker_npc
     @breaker = CodeBreaker.new(breaker_npc)
     @maker = CodeMaker.new(!breaker_npc)
     @max_turns = 12
@@ -137,6 +138,12 @@ class Game
       puts "The Codemaker wins because you didn't guess the code!"
     end
     # TODO: Print who won and then ask to play again
+    puts "That was fun, would you like another go? (yes/no)"
+    choice = gets.chomp.downcase
+    if choice == "yes"
+      game = Game.new(@breaker_npc)
+      game.play
+    end
   end
 end
 game = Game.new(false)
