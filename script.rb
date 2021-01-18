@@ -91,27 +91,6 @@ class CodeMaker
       end
     end
   end
-
-  # REFACTOR
-  def check_interpreter(results)
-    arr = results.shuffle
-    puts "----------------------------------"
-    if arr == "win"
-      puts "All the choices were correct!"
-      return nil
-    end
-    arr.each do |result|
-      case result
-      when 0
-        puts "A choice is completely wrong"
-      when 1
-        puts "A choice is right, but in the wrong place"
-      when 2
-        puts "A choice is right in the right place"
-      end
-    end
-    puts "----------------------------------"
-  end
 end
 
 # The game will do most of the leg work of passing the object's responses to each other
@@ -129,8 +108,6 @@ class Game
     # The breaker's guess is retreived, then checked against the makers secret code
     # The return value of this check is stored in the result variable
     result = @maker.check @breaker.generate_guess
-    @maker.check_interpreter result
-    result
     # interpret and print results
     # Return the results
   end
