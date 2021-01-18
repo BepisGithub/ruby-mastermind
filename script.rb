@@ -27,7 +27,7 @@ class CodeBreaker
       arr = []
       4.times do |n|
         puts "Enter guess number #{n + 1}"
-        choice = gets.chomp.downcase until @@choices.include? choice
+        choice = gets.chomp.downcase.strip until @@choices.include? choice
         arr.push(choice)
       end
       puts "Your choices are #{arr}"
