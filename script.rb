@@ -76,19 +76,20 @@ class CodeMaker
     # E.g. if you guess 3 reds but there are two, nothing should be awarded for the third
 
     # REFACTOR
-    result = []
     guess_arr.each_with_index do |guess, idx|
-      if @secret_code.include? guess
-        if @secret_code[idx] == guess
-          result.push 2
-        else
-          result.push 1
-        end
+      unless @secret_code.include? guess
+        next
+      end
+      if @secret_code[idx] == guess
+        puts "There is an exact match"
       else
-        result.push 0
+        if guess_arr.count(guess) > @secret_code.count(guess)
+          next
+        else
+          puts "There is a colour that is right at the wrong position"
+        end
       end
     end
-    result
   end
 
   # REFACTOR
