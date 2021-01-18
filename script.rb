@@ -51,7 +51,6 @@ class CodeMaker
     # TODO: ALlow the user to be a code maker, this is currently written with it being the NPC in mind
     @secret_code = []
     4.times { secret_code.push(@@choices.sample) }
-    p @secret_code
   end
 
   def check(guess_arr)
