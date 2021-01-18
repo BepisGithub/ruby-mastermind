@@ -51,6 +51,7 @@ class CodeMaker
     # TODO: ALlow the user to be a code maker, this is currently written with it being the NPC in mind
     @secret_code = []
     4.times { secret_code.push(@@choices.sample) }
+    p @secret_code
   end
 
   def check(guess_arr)
@@ -68,7 +69,9 @@ class CodeMaker
       unless @secret_code.include? guess
         next
       end
-      if @secret_code[idx] == guess
+      if @secret_code[idx] == guess # REFACTOR: The issue is that the next check doesn't eval properly. 
+        # There's supposed to be no message for dups, but this one gets triggered and whether it did or not is not 
+        # taken into account by the next check
         puts "There is an exact match"
       else
         if guess_arr.count(guess) > @secret_code.count(guess)
@@ -110,7 +113,7 @@ class Game
     if @breaker.guess == @maker.secret_code
       puts "The Codebreaker wins!"
     else
-      puts "The Codemaker wins because you didn't guess the code!"
+      puts "The Codemaker wins because you didn't guess the code! The code was #{@maker.secret_code}"
     end
     puts "That was fun, would you like another go? (yes/no)"
     choice = gets.chomp.downcase
