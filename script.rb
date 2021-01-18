@@ -65,6 +65,7 @@ class CodeMaker
     # Duplicates are not all awarded
     # E.g. if you guess 3 reds but there are two, nothing should be awarded for the third
 
+    # FIX
     guess_arr.each_with_index do |guess, idx|
       unless @secret_code.include? guess
         next
