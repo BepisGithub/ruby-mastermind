@@ -76,7 +76,6 @@ class CodeMaker
     # Duplicates are not all awarded
     # E.g. if you guess 3 reds but there are two, nothing should be awarded for the third
 
-    # REFACTOR
     guess_arr.each_with_index do |guess, idx|
       unless @secret_code.include? guess
         next
@@ -125,7 +124,6 @@ class Game
     else
       puts "The Codemaker wins because you didn't guess the code!"
     end
-    # TODO: Print who won and then ask to play again
     puts "That was fun, would you like another go? (yes/no)"
     choice = gets.chomp.downcase
     if choice == "yes"
