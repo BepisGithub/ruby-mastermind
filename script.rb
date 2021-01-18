@@ -66,6 +66,7 @@ class CodeMaker
   end
 
   def check(guess_arr)
+    puts "---------------------------------------------"
     return "win" if guess_arr == @secret_code
 
     # Format of the response: an array which ,in no particular order, contains the key
@@ -90,6 +91,7 @@ class CodeMaker
         end
       end
     end
+  puts "---------------------------------------------"
   end
 end
 
