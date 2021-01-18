@@ -33,14 +33,8 @@ class CodeBreaker
       arr = []
       4.times do |n|
         puts "Enter guess number #{n+1}"
-        choice = gets.chomp.to_i until choice.is_a? Integer
-        if choice > 6
-          choice = 6
-        elsif choice < 1
-          choice = 1
-        end
-        choice -= 1
-        arr.push(@@choices[choice])
+        choice = gets.chomp.downcase until @@choices.include? choice
+        arr.push(choice)
       end
       puts "Your choices are #{arr}"
       @guess = arr
