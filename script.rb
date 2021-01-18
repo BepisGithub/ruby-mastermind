@@ -26,7 +26,7 @@ class CodeBreaker
       puts "You will be asked to pick a choice four times to generate your code." # TODO: Potentially only allow the user
       arr = []
       4.times do |n|
-        puts "Enter guess number #{n+1}"
+        puts "Enter guess number #{n + 1}"
         choice = gets.chomp.downcase until @@choices.include? choice
         arr.push(choice)
       end
@@ -96,7 +96,7 @@ class Game
   def round
     # The breaker's guess is retreived, then checked against the makers secret code
     # The return value of this check is stored in the result variable
-    result = @maker.check @breaker.generate_guess
+    @maker.check @breaker.generate_guess
     # interpret and print results
     # Return the results
   end
