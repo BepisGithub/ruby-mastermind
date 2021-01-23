@@ -65,23 +65,17 @@ class CodeMaker
     # Duplicates are not all awarded
     # E.g. if you guess 3 reds but there are two, nothing should be awarded for the third
 
-    # FIX
-    guess_arr.each_with_index do |guess, idx|
-      unless @secret_code.include? guess
-        next
-      end
-      if @secret_code[idx] == guess # REFACTOR: The issue is that the next check doesn't eval properly. 
-        # There's supposed to be no message for dups, but this one gets triggered and whether it did or not is not 
-        # taken into account by the next check
-        puts "There is an exact match"
+    # REFACTOR
+    guess_hash = {}
+    guess_arr.each_with_index do |guess, guess_idx|
+      if guess_hash[guess].nil?
+        guess_hash[guess] = [guess_idx]
       else
-        if guess_arr.count(guess) > @secret_code.count(guess)
-          next
-        else
-          puts "There is a colour that is right at the wrong position"
-        end
+        guess_hash[guess].push(guess_idx)
       end
     end
+    p guess_hash
+
   puts "---------------------------------------------"
   end
 end
