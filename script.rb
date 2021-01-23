@@ -74,8 +74,8 @@ class CodeMaker
     guess_hash.each do |k, v|
       v.each do |index|
         next if @secret_code[index] == k
-
         v.delete_at index if (@secret_code.count k).to_i < (v.length.to_i)
+        p index
       end
     end
   end
@@ -89,6 +89,20 @@ class CodeMaker
     p guess_hash
     delete_extra_guesses guess_hash
     p guess_hash
+    @secret_code.each_with_index do |secret, index|
+      # REFACTOR
+      if guess_hash.key? secret # Check if the guess includes the value in the secret code
+        if guess_hash[secret].include? index # If the guess is at the exact location
+          puts "A colour is at exactly the right place"
+          guess_hash[secret].delete_at index
+        else # If the guess is at the wrong location
+          puts "A colour is right but at the wrong place"
+          # TODO: Potentially delete one of the values in the array
+        end
+
+
+      end
+    end
 
   puts "---------------------------------------------"
   end
