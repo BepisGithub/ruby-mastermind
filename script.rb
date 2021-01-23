@@ -96,9 +96,7 @@ class CodeMaker
     results = []
     # REFACTOR
     guess_hash = array_to_hash guess_arr
-    p guess_hash
     delete_extra_guesses guess_hash
-    p guess_hash
     @secret_code.each_with_index do |secret, index|
       # REFACTOR
       if guess_hash.key? secret # Check if the guess includes the value in the secret code
