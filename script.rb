@@ -54,6 +54,18 @@ class CodeMaker
     p @secret_code
   end
 
+  def array_to_hash(guess_arr)
+    guess_hash = {}
+    guess_arr.each_with_index do |guess, guess_idx|
+      if guess_hash[guess].nil?
+        guess_hash[guess] = [guess_idx]
+      else
+        guess_hash[guess].push(guess_idx)
+      end
+    end
+    guess_hash
+  end
+
   def check(guess_arr)
     puts "---------------------------------------------"
     return "win" if guess_arr == @secret_code
@@ -66,14 +78,7 @@ class CodeMaker
     # E.g. if you guess 3 reds but there are two, nothing should be awarded for the third
 
     # REFACTOR
-    guess_hash = {}
-    guess_arr.each_with_index do |guess, guess_idx|
-      if guess_hash[guess].nil?
-        guess_hash[guess] = [guess_idx]
-      else
-        guess_hash[guess].push(guess_idx)
-      end
-    end
+    guess_hash = array_to_hash guess_arr
     p guess_hash
 
   puts "---------------------------------------------"
