@@ -51,7 +51,6 @@ class CodeMaker
     # TODO: ALlow the user to be a code maker, this is currently written with it being the NPC in mind
     @secret_code = []
     4.times { secret_code.push(@@choices.sample) }
-    p @secret_code
   end
 
   # This function takes the guess array and converts it into a hash
@@ -87,9 +86,7 @@ class CodeMaker
 
     # REFACTOR
     guess_hash = array_to_hash guess_arr
-    p guess_hash
     delete_extra_guesses guess_hash
-    p guess_hash
     @secret_code.each_with_index do |secret, index|
       # REFACTOR
       if guess_hash.key? secret # Check if the guess includes the value in the secret code
@@ -99,6 +96,14 @@ class CodeMaker
         else # If the guess is at the wrong location
           puts "A colour is right but at the wrong place"
           # TODO: Potentially delete one of the values in the array
+          guess_hash[secret].each_with_index do |value, idx|
+            if @secret_code[value] == secret
+              next
+            else
+              guess_hash[secret].delete_at idx
+              break
+            end
+          end
         end
 
 
