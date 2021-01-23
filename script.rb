@@ -50,7 +50,7 @@ class CodeMaker
     @npc = npc
     # TODO: ALlow the user to be a code maker, this is currently written with it being the NPC in mind
     @secret_code = []
-    @secret_code = ["white","black","green","white"]# 4.times { secret_code.push(@@choices.sample) }
+    4.times { secret_code.push(@@choices.sample) }
   end
 
   # This function takes the guess array and converts it into a hash
