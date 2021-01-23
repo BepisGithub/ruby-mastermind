@@ -145,7 +145,7 @@ class Game
     # The return value of this check is stored in the result variable
     @maker.check @breaker.generate_guess
     # interpret and print results
-    # Return the results
+    # Return the result
   end
 
   def play
