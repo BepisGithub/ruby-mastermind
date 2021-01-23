@@ -54,6 +54,8 @@ class CodeMaker
     p @secret_code
   end
 
+  # This function takes the guess array and converts it into a hash
+  # The has contains the key as the guess colour and the indexes of the colour in the guess as a value
   def array_to_hash(guess_arr)
     guess_hash = {}
     guess_arr.each_with_index do |guess, guess_idx|
@@ -66,19 +68,26 @@ class CodeMaker
     guess_hash
   end
 
+  # This function takes the guess hash and deletes indexes of duplicate guesses if there
+  # are more guesses of a colour than the number of them in the secret code
+  def delete_extra_guesses(guess_hash)
+    guess_hash.each do |k, v|
+      v.each do |index|
+        next if @secret_code[index] == k
+
+        v.delete_at index if (@secret_code.count k).to_i < (v.length.to_i)
+      end
+    end
+  end
+
   def check(guess_arr)
     puts "---------------------------------------------"
     return "win" if guess_arr == @secret_code
 
-    # Format of the response: an array which ,in no particular order, contains the key
-    # The key is that a 2 indicates it is in the right place, a 1 indicates the colour is right but in the wrong place
-    # A 0 means it was completely wrong
-
-    # Duplicates are not all awarded
-    # E.g. if you guess 3 reds but there are two, nothing should be awarded for the third
-
     # REFACTOR
     guess_hash = array_to_hash guess_arr
+    p guess_hash
+    delete_extra_guesses guess_hash
     p guess_hash
 
   puts "---------------------------------------------"
