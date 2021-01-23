@@ -80,10 +80,17 @@ class CodeMaker
     end
   end
 
+  def check_interpreter(results)
+    results.shuffle.each do |result|
+      puts "A colour is at exactly the right place" if result == 2
+      puts "A colour is right but at the wrong place" if result == 1
+    end
+  end
+
   def check(guess_arr)
     puts "---------------------------------------------"
     return "win" if guess_arr == @secret_code
-
+    results = []
     # REFACTOR
     guess_hash = array_to_hash guess_arr
     delete_extra_guesses guess_hash
@@ -91,11 +98,12 @@ class CodeMaker
       # REFACTOR
       if guess_hash.key? secret # Check if the guess includes the value in the secret code
         if guess_hash[secret].include? index # If the guess is at the exact location
-          puts "A colour is at exactly the right place"
+          # puts "A colour is at exactly the right place"
+          results.push 2
           guess_hash[secret].delete_at index
         else # If the guess is at the wrong location
-          puts "A colour is right but at the wrong place"
-          # TODO: Potentially delete one of the values in the array
+          # puts "A colour is right but at the wrong place"
+          results.push 1
           guess_hash[secret].each_with_index do |value, idx|
             if @secret_code[value] == secret
               next
@@ -105,11 +113,9 @@ class CodeMaker
             end
           end
         end
-
-
       end
     end
-
+    check_interpreter results
   puts "---------------------------------------------"
   end
 end
