@@ -50,7 +50,7 @@ class CodeMaker
     @npc = npc
     # TODO: ALlow the user to be a code maker, this is currently written with it being the NPC in mind
     @secret_code = []
-    @secret_code = ["black","orange","black","black"] # 4.times { secret_code.push(@@choices.sample) } # FIX
+    4.times { secret_code.push(@@choices.sample) } # FIX
   end
 
   # This function takes the guess array and converts it into a hash
@@ -70,7 +70,6 @@ class CodeMaker
   # This function takes the guess hash and deletes indexes of duplicate guesses if there
   # are more guesses of a colour than the number of them in the secret code
   def delete_extra_guesses(guess_hash)
-    p guess_hash
     guess_hash.each do |k, v|
       guess_hash.reject! { |k| (@secret_code.count k) == 0  }
     end
@@ -92,7 +91,6 @@ class CodeMaker
         end
       end
     end
-  p guess_hash
   end
 
   def check_interpreter(results)
