@@ -83,7 +83,7 @@ class CodeMaker
             if @secret_code[item] == k
               next
             else
-              v.delete_at(v.index item)
+              v.delete_at(v.index(item))
               num_extra_guesses -= 1
               break
             end
@@ -105,7 +105,6 @@ class CodeMaker
     return "win" if guess_arr == @secret_code
 
     results = []
-    # REFACTOR
     guess_hash = array_to_hash guess_arr
     delete_extra_guesses guess_hash
 
