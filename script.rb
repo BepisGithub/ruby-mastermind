@@ -70,14 +70,29 @@ class CodeMaker
   # This function takes the guess hash and deletes indexes of duplicate guesses if there
   # are more guesses of a colour than the number of them in the secret code
   def delete_extra_guesses(guess_hash)
+    p guess_hash
     guess_hash.each do |k, v|
       guess_hash.reject! { |k| (@secret_code.count k) == 0  }
     end
-    p guess_hash
     guess_hash.each do |k, v|
-      guess_hash.delete k if guess_hash[k] == []
+      num_extra_guesses = v.length - (@secret_code.count k)
+      if num_extra_guesses < 1
+        next
+      else
+        while num_extra_guesses >= 1
+          v.each do |item|
+            if @secret_code[item] == k
+              next
+            else
+              v.delete_at(v.index item)
+              num_extra_guesses -= 1
+              break
+            end
+          end
+        end
+      end
     end
-    p guess_hash
+  p guess_hash
   end
 
   def check_interpreter(results)
