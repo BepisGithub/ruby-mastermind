@@ -50,7 +50,7 @@ class CodeMaker
     @npc = npc
     # TODO: ALlow the user to be a code maker, this is currently written with it being the NPC in mind
     @secret_code = []
-    4.times { secret_code.push(@@choices.sample) } # FIX
+    4.times { secret_code.push(@@choices.sample) }
   end
 
   # This function takes the guess array and converts it into a hash
@@ -71,19 +71,19 @@ class CodeMaker
   # are more guesses of a colour than the number of them in the secret code
   def delete_extra_guesses(guess_hash)
     guess_hash.each do |k, v|
-      guess_hash.reject! { |k| (@secret_code.count k) == 0  }
+      guess_hash.reject! { |k| (@secret_code.count k) == 0  } # Getting rid of key colours not present in the secret code
     end
     guess_hash.each do |k, v|
-      num_extra_guesses = v.length - (@secret_code.count k)
-      if num_extra_guesses < 1
+      num_extra_guesses = v.length - (@secret_code.count k) # How many more of a colour there are in the guess vs the secret code
+      if num_extra_guesses < 1 # If there aren't any extra then skip to the next colour
         next
       else
-        while num_extra_guesses >= 1
+        while num_extra_guesses >= 1 # While there are too many
           v.each do |item|
             if @secret_code[item] == k
               next
             else
-              v.delete_at(v.index(item))
+              v.delete_at(v.index(item)) # If the index is not the exact one, delete it
               num_extra_guesses -= 1
               break
             end
@@ -148,7 +148,7 @@ class Game
       @turns += 1
     end
     if @breaker.guess == @maker.secret_code
-      puts "The Codebreaker wins!"
+      puts "The Codebreaker wins! The secret code was #{@maker.secret_code}"
     else
       puts "The Codemaker wins because you didn't guess the code! The code was #{@maker.secret_code}"
     end
