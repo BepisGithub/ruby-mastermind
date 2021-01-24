@@ -71,16 +71,13 @@ class CodeMaker
   # are more guesses of a colour than the number of them in the secret code
   def delete_extra_guesses(guess_hash)
     guess_hash.each do |k, v|
-      # v.each do |index|
-      #   next if @secret_code[index] == k
-      #   v.delete_at index if (@secret_code.count k).to_i < (v.length.to_i)
-      #   p index
-      # end
-      v.select! { |index| (@secret_code.count k).to_i >= (v.length.to_i) || @secret_code[index] == k }
+      guess_hash.reject! { |k| (@secret_code.count k) == 0  }
     end
+    p guess_hash
     guess_hash.each do |k, v|
       guess_hash.delete k if guess_hash[k] == []
     end
+    p guess_hash
   end
 
   def check_interpreter(results)
