@@ -17,7 +17,7 @@ class CodeBreaker
     [@@choices.sample, @@choices.sample, @@choices.sample, @@choices.sample]
   end
 
-  def generate_guess
+  def generate_guess(result)
     # TODO: Add a conditional so that this random guess is only called if the codebreaker is an NPC
     if @npc == true
       @guess = random_guess
@@ -124,6 +124,8 @@ end
 
 # The game will do most of the leg work of passing the object's responses to each other
 class Game
+  include Player
+
   def initialize(breaker_npc)
     # For now, build it so that the computer generates the code and the player has to guess
     @breaker_npc = breaker_npc
@@ -131,19 +133,33 @@ class Game
     @maker = CodeMaker.new(!breaker_npc)
     @max_turns = 12
     @turns = 1
+    @end_game = false
   end
 
   def round
+    result = []
     if !@breaker_npc
       # The breaker's guess is retreived, then checked against the makers secret code
       # The return value of this check is stored in the result variable
-      result = @maker.check @breaker.generate_guess
+      result = @maker.check @breaker.generate_guess nil
       @maker.check_interpreter result
       # interpret and print results
       # Return the result
     else
-      @maker.check @breaker.generate_guess
-
+      @breaker.generate_guess result
+      puts "The breakers guess is #{@breaker.guess}"
+      puts 'How many are the right colour in the right place? Enter a number '
+      result = []
+      right_place = gets.chomp.to_i until right_place.is_a? Integer
+      right_place.times do
+        result.push 2
+      end
+      puts 'How many are the right colour in the wrong place? Enter a number '
+      wrong_place = gets.chomp.to_i until wrong_place.is_a? Integer
+      wrong_place.times do
+        result.push 1
+      end
+      @end_game = true if result == [2, 2, 2, 2]
     end
   end
 
@@ -166,13 +182,19 @@ class Game
         game.play
       end
     else # If the code breaker is not a human
-      until @turns > @max_turns # || when the npc guesses correctly
+      puts 'Think of a 4 colour combination in your head'
+      puts "The choices are #{@@choices}"
+      until @turns > @max_turns || @end_game
         round
         @turns += 1
       end
-    
-    end  
+      if @end_game
+        puts 'The Codebreaker wins!'
+      else
+        puts 'The Codemaker wins!'
+      end
+    end
   end
 end
-game = Game.new(false)
+game = Game.new(true)
 game.play
