@@ -156,14 +156,14 @@ class Game
       puts "The breakers guess is #{@breaker.guess}"
       puts 'How many are the right colour in the right place? Enter a number '
       result = []
-      right_place = gets.chomp.to_i until right_place.is_a? Integer
+      right_place = gets.chomp.to_i until right_place.is_a?(Integer) && right_place < 5
       right_place.times do
         result.push 2
       end
       @end_game = true if result == [2, 2, 2, 2]
       unless @end_game == true
         puts 'How many are the right colour in the wrong place? Enter a number '
-        wrong_place = gets.chomp.to_i until wrong_place.is_a? Integer
+        wrong_place = gets.chomp.to_i until wrong_place.is_a?(Integer) && wrong_place <= (4-right_place)
         wrong_place.times do
           result.push 1
         end
