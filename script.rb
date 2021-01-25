@@ -94,14 +94,15 @@ class CodeMaker
   end
 
   def check_interpreter(results)
+    puts "---------------------------------------------"
     results.shuffle.each do |result|
       puts "A colour is at exactly the right place" if result == 2
       puts "A colour is right but at the wrong place" if result == 1
     end
+    puts "---------------------------------------------"
   end
 
   def check(guess_arr)
-    puts "---------------------------------------------"
     return "win" if guess_arr == @secret_code
 
     results = []
@@ -117,8 +118,7 @@ class CodeMaker
         end
       end
     end
-    check_interpreter results
-    puts "---------------------------------------------"
+    results
   end
 end
 
@@ -134,30 +134,44 @@ class Game
   end
 
   def round
-    # The breaker's guess is retreived, then checked against the makers secret code
-    # The return value of this check is stored in the result variable
-    @maker.check @breaker.generate_guess
-    # interpret and print results
-    # Return the result
+    if !@breaker_npc
+      # The breaker's guess is retreived, then checked against the makers secret code
+      # The return value of this check is stored in the result variable
+      result = @maker.check @breaker.generate_guess
+      @maker.check_interpreter result
+      # interpret and print results
+      # Return the result
+    else
+      @maker.check @breaker.generate_guess
+
+    end
   end
 
   def play
-    until @turns > @max_turns || @breaker.guess == @maker.secret_code # TODO: Replace "|| @breaker.guess == @maker.secret_code"
-      # with a check at the end of the function that breaks if the result from the round function is a win
-      round
-      @turns += 1
-    end
-    if @breaker.guess == @maker.secret_code
-      puts "The Codebreaker wins! The secret code was #{@maker.secret_code}"
-    else
-      puts "The Codemaker wins because you didn't guess the code! The code was #{@maker.secret_code}"
-    end
-    puts "That was fun, would you like another go? (yes/no)"
-    choice = gets.chomp.downcase
-    if choice == "yes"
-      game = Game.new(@breaker_npc) # TODO: Get the input for the choice. e.g. make a get choice method, then initialize the game and from the init call the get choice method
-      game.play
-    end
+    if !@breaker_npc # If the code breaker is a human
+      until @turns > @max_turns || @breaker.guess == @maker.secret_code # TODO: Replace "|| @breaker.guess == @maker.secret_code"
+        # with a check at the end of the function that breaks if the result from the round function is a win
+        round
+        @turns += 1
+      end
+      if @breaker.guess == @maker.secret_code
+        puts "The Codebreaker wins! The secret code was #{@maker.secret_code}"
+      else
+        puts "The Codemaker wins because you didn't guess the code! The code was #{@maker.secret_code}"
+      end
+      puts "That was fun, would you like another go? (yes/no)"
+      choice = gets.chomp.downcase
+      if choice == "yes"
+        game = Game.new(@breaker_npc) # TODO: Get the input for the choice. e.g. make a get choice method, then initialize the game and from the init call the get choice method
+        game.play
+      end
+    else # If the code breaker is not a human
+      until @turns > @max_turns # || when the npc guesses correctly
+        round
+        @turns += 1
+      end
+    
+    end  
   end
 end
 game = Game.new(false)
