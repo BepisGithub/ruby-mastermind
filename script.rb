@@ -173,6 +173,15 @@ class Game
     end
   end
 
+  def another
+    puts "That was fun, would you like another go? (yes/no)"
+    choice = gets.chomp.downcase
+    if choice == "yes"
+      game = Game.new
+      game.play
+    end
+  end
+
   def play
     if !@breaker_npc # If the code breaker is a human
       until @turns > @max_turns || @breaker.guess == @maker.secret_code # TODO: Replace "|| @breaker.guess == @maker.secret_code"
@@ -185,12 +194,7 @@ class Game
       else
         puts "The Codemaker wins because you didn't guess the code! The code was #{@maker.secret_code}"
       end
-      puts "That was fun, would you like another go? (yes/no)"
-      choice = gets.chomp.downcase
-      if choice == "yes"
-        game = Game.new(@breaker_npc) # TODO: Get the input for the choice. e.g. make a get choice method, then initialize the game and from the init call the get choice method
-        game.play
-      end
+      another
     else # If the code breaker is not a human
       puts 'Think of a 4 colour combination in your head'
       puts "The choices are #{@@choices}"
@@ -203,6 +207,7 @@ class Game
       else
         puts 'The Codemaker wins because the Codebreaker didn\'t guess the code!'
       end
+      another
     end
   end
 end
