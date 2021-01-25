@@ -126,11 +126,17 @@ end
 class Game
   include Player
 
-  def initialize(breaker_npc)
+  def initialize
     # For now, build it so that the computer generates the code and the player has to guess
-    @breaker_npc = breaker_npc
-    @breaker = CodeBreaker.new(breaker_npc)
-    @maker = CodeMaker.new(!breaker_npc)
+    puts 'Would you like to be the Codemaker? (yes/no)'
+    @breaker_npc = gets.chomp.downcase
+    if @breaker_npc == 'yes'
+      @breaker_npc = true
+    else
+      @breaker_npc = false
+    end
+    @breaker = CodeBreaker.new(@breaker_npc)
+    @maker = CodeMaker.new(!@breaker_npc)
     @max_turns = 12
     @turns = 1
     @end_game = false
@@ -154,12 +160,14 @@ class Game
       right_place.times do
         result.push 2
       end
-      puts 'How many are the right colour in the wrong place? Enter a number '
-      wrong_place = gets.chomp.to_i until wrong_place.is_a? Integer
-      wrong_place.times do
-        result.push 1
-      end
       @end_game = true if result == [2, 2, 2, 2]
+      unless @end_game == true
+        puts 'How many are the right colour in the wrong place? Enter a number '
+        wrong_place = gets.chomp.to_i until wrong_place.is_a? Integer
+        wrong_place.times do
+          result.push 1
+        end
+      end
     end
   end
 
@@ -196,5 +204,5 @@ class Game
     end
   end
 end
-game = Game.new(true)
+game = Game.new
 game.play
