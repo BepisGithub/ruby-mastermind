@@ -148,7 +148,9 @@ class Game
       # The breaker's guess is retreived, then checked against the makers secret code
       # The return value of this check is stored in the result variable
       result = @maker.check @breaker.generate_guess nil
-      @maker.check_interpreter result
+      unless result == 'win'
+        @maker.check_interpreter result
+      end
       # interpret and print results
       # Return the result
     else
