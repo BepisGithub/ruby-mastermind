@@ -201,7 +201,7 @@ class Game
       if @end_game
         puts 'The Codebreaker wins!'
       else
-        puts 'The Codemaker wins!'
+        puts 'The Codemaker wins because the Codebreaker didn\'t guess the code!'
       end
     end
   end
