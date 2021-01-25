@@ -194,7 +194,6 @@ class Game
       else
         puts "The Codemaker wins because you didn't guess the code! The code was #{@maker.secret_code}"
       end
-      another
     else # If the code breaker is not a human
       puts 'Think of a 4 colour combination in your head'
       puts "The choices are #{@@choices}"
@@ -207,8 +206,8 @@ class Game
       else
         puts 'The Codemaker wins because the Codebreaker didn\'t guess the code!'
       end
-      another
     end
+    another
   end
 end
 game = Game.new
