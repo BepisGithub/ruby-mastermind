@@ -20,6 +20,7 @@ class CodeBreaker
   def generate_guess(result)
     # TODO: Add a conditional so that this random guess is only called if the codebreaker is an NPC
     if @npc == true
+      p result
       @guess = random_guess
     else
       puts "The choices are #{@@choices}"
@@ -37,6 +38,7 @@ class CodeBreaker
 
   def initialize(npc)
     @npc = npc
+    @guess = random_guess
   end
   
 end
@@ -143,7 +145,6 @@ class Game
   end
 
   def round
-    result = []
     if !@breaker_npc
       # The breaker's guess is retreived, then checked against the makers secret code
       # The return value of this check is stored in the result variable
@@ -154,7 +155,6 @@ class Game
       # interpret and print results
       # Return the result
     else
-      @breaker.generate_guess result
       puts "The breakers guess is #{@breaker.guess}"
       puts 'How many are the right colour in the right place? Enter a number '
       result = []
@@ -170,6 +170,7 @@ class Game
           result.push 1
         end
       end
+      @breaker.generate_guess result
     end
   end
 
