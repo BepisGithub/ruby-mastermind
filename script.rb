@@ -17,11 +17,16 @@ class CodeBreaker
     [@@choices.sample, @@choices.sample, @@choices.sample, @@choices.sample]
   end
 
+  def random_choice(possible)
+    [possible.sample, possible.sample, possible.sample, possible.sample]
+  end
+
   def generate_guess(result)
     # TODO: Add a conditional so that this random guess is only called if the codebreaker is an NPC
     if @npc == true
       p result
-      @guess = random_guess
+      @possible = @@choices - @guess if result.empty? && !(result.nil?)
+      @guess = random_choice @possible
     else
       puts "The choices are #{@@choices}"
       puts "You will be asked to pick a choice four times to generate your code." # TODO: Potentially only allow the user
@@ -39,6 +44,7 @@ class CodeBreaker
   def initialize(npc)
     @npc = npc
     @guess = random_guess
+    @possible = @@choices
   end
   
 end
