@@ -22,7 +22,6 @@ class CodeBreaker
   end
 
   def generate_guess(result)
-    # TODO: Add a conditional so that this random guess is only called if the codebreaker is an NPC
     if @npc == true
       @possible -= @guess if result.empty? && !(result.nil?)
       p @possible
@@ -33,7 +32,7 @@ class CodeBreaker
       @guess = random_choice @possible
     else
       puts "The choices are #{@@choices}"
-      puts "You will be asked to pick a choice four times to generate your code." # TODO: Potentially only allow the user
+      puts "You will be asked to pick a choice four times to generate your code."
       arr = []
       4.times do |n|
         puts "Enter guess number #{n + 1}"
@@ -50,7 +49,7 @@ class CodeBreaker
     @guess = random_guess
     @possible = @@choices
   end
-  
+
 end
 
 # This will contain everything the one who is making the code needs to 1.) Store the code 2.) Respond to a check
@@ -60,7 +59,6 @@ class CodeMaker
 
   def initialize(npc)
     @npc = npc
-    # TODO: ALlow the user to be a code maker, this is currently written with it being the NPC in mind
     @secret_code = []
     4.times { secret_code.push(@@choices.sample) }
   end
@@ -195,7 +193,7 @@ class Game
 
   def play
     if !@breaker_npc # If the code breaker is a human
-      until @turns > @max_turns || @breaker.guess == @maker.secret_code # TODO: Replace "|| @breaker.guess == @maker.secret_code"
+      until @turns > @max_turns || @breaker.guess == @maker.secret_code
         # with a check at the end of the function that breaks if the result from the round function is a win
         round
         @turns += 1
