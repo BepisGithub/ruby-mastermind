@@ -24,8 +24,12 @@ class CodeBreaker
   def generate_guess(result)
     # TODO: Add a conditional so that this random guess is only called if the codebreaker is an NPC
     if @npc == true
-      p result
-      @possible = @@choices - @guess if result.empty? && !(result.nil?)
+      @possible -= @guess if result.empty? && !(result.nil?)
+      p @possible
+      if @possible.empty?
+        puts 'I think you have given me some faulty info!'
+        @possible = @@choices
+      end
       @guess = random_choice @possible
     else
       puts "The choices are #{@@choices}"
