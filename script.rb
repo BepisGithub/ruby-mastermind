@@ -23,6 +23,7 @@ class CodeBreaker
 
   def generate_guess(result)
     if @npc == true
+      # TODO: add a smarter guessing algorithm
       @possible -= @guess if result.empty? && !(result.nil?)
       p @possible
       if @possible.empty?
